@@ -1,9 +1,19 @@
-const express = require('express')
-const dotenv = require('dotenv').config()
-const port = process.env.PORT || 5000
+const express = require("express");
+const colors = require("colors");
+const dotenv = require("dotenv").config();
+const { errorHandler } = require("./middleware/errorMiddleware");
+const connectDB = require("./config/db");
+const port = process.env.PORT || 5000;
 
-const app = express()
+connectDB();
 
-app.use('/api/items', require('./routes/itemRoutes'))
+const app = express();
 
-app.listen(port, () => console.log(`Server started on ${port}`))
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/api/items", require("./routes/itemRoutes"));
+
+app.use(errorHandler);
+
+app.listen(port, () => console.log(`Server started on ${port}`));
