@@ -1,11 +1,12 @@
-const Item = require("../model/itemModel");
+const Item = require("../models/itemModel");
+const asyncHandler = require("express-async-handler");
 
-const getItems = async (req, res) => {
+const getItems = asyncHandler(async (req, res) => {
   const items = await Item.find();
   res.status(200).json(items);
-};
+});
 
-const postItem = async (req, res) => {
+const postItem = asyncHandler(async (req, res) => {
   if (!req.body.text) {
     res.status(400);
     throw new Error("Please add a text field");
@@ -15,9 +16,9 @@ const postItem = async (req, res) => {
     text: req.body.text,
   });
   res.status(200).json(item);
-};
+});
 
-const putItem = async (req, res) => {
+const putItem = asyncHandler(async (req, res) => {
   const item = await Item.findById(req.params.id);
 
   if (!item) {
@@ -29,9 +30,9 @@ const putItem = async (req, res) => {
     new: true,
   });
   res.status(200).json(updatedItem);
-};
+});
 
-const deleteItem = async (req, res) => {
+const deleteItem = asyncHandler(async (req, res) => {
   const item = await Item.findById(req.params.id);
   if (!item) {
     res.status(400);
@@ -40,7 +41,7 @@ const deleteItem = async (req, res) => {
 
   await item.remove();
   res.status(200).json({ id: req.params.id });
-};
+});
 
 module.exports = {
   getItems,
