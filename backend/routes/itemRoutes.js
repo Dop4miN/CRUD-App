@@ -7,7 +7,9 @@ const {
   deleteItem,
 } = require("../controllers/itemController");
 
-router.route("/").get(getItems).post(postItem);
-router.route("/:id").put(putItem).delete(deleteItem);
+const { protect } = require("../middleware/authMiddleware");
+
+router.route("/").get(protect, getItems).post(protect, postItem);
+router.route("/:id").put(protect, putItem).delete(protect, deleteItem);
 
 module.exports = router;
