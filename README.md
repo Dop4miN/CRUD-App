@@ -8,4 +8,5 @@ Example:
 NODE_ENV = development
 PORT = 5000
 MONGO_URI = mongodb+srv://<username>:<password>@<mongo_uri>/?retryWrites=true&w=majority
+JWT_SECRET = abc123
 ```
