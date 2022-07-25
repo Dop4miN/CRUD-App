@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import ItemForm from "../components/ItemForm";
 import Item from "../components/Item";
 import Spinner from "../components/Spinner";
-import { getItems, reset } from "../features/items/itemSlice";
+import { getItems } from "../features/items/itemSlice";
+import { reset } from "../features/auth/authSlice";
 
 function Dashboard() {
   const navigate = useNavigate();
